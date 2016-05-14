@@ -35,6 +35,19 @@ unsigned int valve4Pin = 10;		// pin 4
 unsigned int pump2Pin = 11;		// pin 7
 unsigned int waterLVL4 = 12;		// pin 8
 
+void setup_pins(void){
+	gpio_export(valve4Pin);
+	gpio_set_dir(valve4Pin, OUTPUT);
+	gpio_export(pump2Pin);
+	gpio_set_dir(pump2Pin, OUTPUT);
+
+	/* Turn on valves & pump2 */
+	// gpio_set_value(valve2Pin, LOW);
+	// gpio_set_value(valve3Pin, LOW);
+	gpio_set_value(valve4Pin, LOW);
+	gpio_set_value(pump2Pin, LOW);
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	if (argc < 2) {										// check for any arguments, if none, display messages
@@ -44,12 +57,6 @@ int main(int argc, char **argv, char **envp)
 	} else {											// if received arguments, display message
 		printf("Program Started ... \nPlease press <enter> to exit this program.\n");
 	}
-
-	/* Turn on valves & pump2 */
-	// gpio_set_value(valve2Pin, LOW);
-	// gpio_set_value(valve3Pin, LOW);
-	gpio_set_value(valve4Pin, LOW);
-	gpio_set_value(pump2Pin, LOW);
 
 	struct gpio_struct args;
 	args.gpio = atoi(argv[1]);							// get the first argument
